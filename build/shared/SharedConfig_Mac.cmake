@@ -16,7 +16,11 @@ cmake_minimum_required(VERSION 3.5.2)
 # ==============================================================================
 DetectXCodeVersion()
 
-if(${CMAKE_INSTALLED_XCODE_VERSION} LESS 4.3.0)
+if(NOT DEFINED CMAKE_INSTALLED_XCODE_VERSION OR "${CMAKE_INSTALLED_XCODE_VERSION}" STREQUAL "")
+    set(CMAKE_INSTALLED_XCODE_VERSION "999.0")
+endif()
+
+if(CMAKE_INSTALLED_XCODE_VERSION VERSION_LESS "4.3.0")
 	if(NOT DEFINED ${COMPONENT}_DEVELOPER_ROOT)
 		set(${COMPONENT}_DEVELOPER_ROOT "/Developer")
 	endif()
